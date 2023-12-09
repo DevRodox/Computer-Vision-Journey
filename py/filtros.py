@@ -1,0 +1,47 @@
+import cv2
+import matplotlib.pyplot as plt
+
+# Cargar una imagen en escala de grises
+image = cv2.imread('imagen.jpg', cv2.IMREAD_GRAYSCALE)
+
+# Filtro de Suavizado (Blur)
+blurred = cv2.GaussianBlur(image, (5, 5), 0)
+plt.subplot(1, 2, 1)
+plt.imshow(image, cmap='gray')
+plt.title('Imagen Original')
+plt.subplot(1, 2, 2)
+plt.imshow(blurred, cmap='gray')
+plt.title('Imagen Suavizada')
+plt.show()
+
+# Filtro de Detección de Bordes (Sobel)
+sobel_x = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=3)
+sobel_y = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
+gradient_magnitude = np.sqrt(sobel_x**2 + sobel_y**2)
+plt.subplot(1, 2, 1)
+plt.imshow(image, cmap='gray')
+plt.title('Imagen Original')
+plt.subplot(1, 2, 2)
+plt.imshow(gradient_magnitude, cmap='gray')
+plt.title('Magnitud del Gradiente')
+plt.show()
+
+# Filtro de Realce de Bordes (Laplacian)
+laplacian = cv2.Laplacian(image, cv2.CV_64F)
+plt.subplot(1, 2, 1)
+plt.imshow(image, cmap='gray')
+plt.title('Imagen Original')
+plt.subplot(1, 2, 2)
+plt.imshow(laplacian, cmap='gray')
+plt.title('Imagen con Realce de Bordes')
+plt.show()
+
+# Filtro de Umbralización (Thresholding)
+_, thresholded = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+plt.subplot(1, 2, 1)
+plt.imshow(image, cmap='gray')
+plt.title('Imagen Original')
+plt.subplot(1, 2, 2)
+plt.imshow(thresholded, cmap='gray')
+plt.title('Imagen Umbralizada')
+plt.show()
